@@ -1,18 +1,27 @@
 public class SalaryWorker extends Worker {
 
-    double salary;
+   double salary;
+
     public SalaryWorker(String IDNum, String firstName, String lastname, String title, int YOB) {
         super(IDNum, firstName, lastname, title, YOB);
     }
 
-    public double WeeklyPay() {
+    public double WeeklyPay(double hoursWorked) {
         return salary / 52;
     }
-    @Override
-    public void displayWeeklyPay() {
-        double pay = WeeklyPay();
-        System.out.println(fullName() + " earning $" + pay + " per week out of $" + salary + " per year");
+
+    public void setAnnualSalary(double salary){
+        this.salary = salary;
     }
+
+    @Override
+    public void displayWeeklyPay(double hoursWorked){
+        double weeklyPay = WeeklyPay(hoursWorked);
+        System.out.printf("%s: Annual Salary: $%.2f, Weekly Pay: $%.2f (1/52 of annual)%n",
+                fullName(), salary, weeklyPay);
+
+    }
+
     @Override
     public String toCSVRecord() {
         return super.toCSVRecord() + "," + salary;
